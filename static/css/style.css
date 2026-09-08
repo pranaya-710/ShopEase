@@ -1,0 +1,56 @@
+.navbar-brand{
+    font-size:28px;
+}
+
+body{
+    background:#f8f7f7;
+}
+
+.btn-primary{
+    padding:12px 30px;
+    border-radius:30px;
+}
+
+.hero-section{
+    background:linear-gradient(135deg,#8aaee3,#6610f2);
+    padding:100px 20px;
+    border-radius:20px;
+    margin-top:30px;
+}
+
+.category-card{
+    background:rgb(225, 156, 156);
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    transition:.3s;
+    cursor:pointer;
+    font-size:40px;
+}
+
+.category-card h5{
+    margin-top:20px;
+    font-weight:bold;
+}
+
+.category-card:hover{
+    transform:translateY(-10px);
+}
+
+.product-card{
+    transition:0.3s;
+    border:none;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.product-card img{
+    height:220px;
+    object-fit:cover;
+}
+
+.product-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+}

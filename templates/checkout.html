@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}
+Checkout | ShopEase
+{% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+
+    <h1 class="mb-4">🛒 Checkout</h1>
+
+    <form action="{{ url_for('place_order') }}" method="POST">
+
+        <div class="row">
+
+            <!-- Customer Details -->
+            <div class="col-md-7">
+
+                <h3 class="mb-3">Customer Details</h3>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input
+                                type="text"
+                                name="name"
+                                class="form-control"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                class="form-control"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input
+                                type="tel"
+                                name="phone"
+                                class="form-control"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <textarea
+                                name="address"
+                                class="form-control"
+                                rows="3"
+                                required></textarea>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">City</label>
+                                <input
+                                    type="text"
+                                    name="city"
+                                    class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">State</label>
+                                <input
+                                    type="text"
+                                    name="state"
+                                    class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Pincode</label>
+                                <input
+                                    type="text"
+                                    name="pincode"
+                                    class="form-control"
+                                    required>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <h3 class="mb-3">Order Summary</h3>
+
+                {% for product in cart_products %}
+
+                <div class="card mb-3">
+
+                    <div class="card-body d-flex justify-content-between">
+
+                        <div>
+                            <h5>{{ product.name }}</h5>
+
+                            <p class="mb-0">
+                                ₹{{ product.price }} × {{ product.quantity }}
+                            </p>
+                        </div>
+
+                        <strong>
+                            ₹{{ product.subtotal }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            <!-- Total -->
+            <div class="col-md-5">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <h3>Order Total</h3>
+
+                        <hr>
+
+                        <h4>
+                            Total: ₹{{ total }}
+                        </h4>
+
+                        <button
+                            type="submit"
+                            class="btn btn-success w-100 mt-3">
+                            Place Order
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

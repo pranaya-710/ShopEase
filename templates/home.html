@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home | ShopEase
+{% endblock %}
+
+{% block content %}
+
+<div class="text-center mt-5">
+
+    <h1 class="display-4 fw-bold">
+        Welcome to ShopEase 🛍️
+    </h1>
+
+    <p class="lead">
+        Shop smarter with the best deals and latest products.
+    </p>
+
+    <a href="#" class="btn btn-primary btn-lg">
+        Explore Products
+    </a>
+
+</div>
+
+<!-- Hero Section -->
+<section class="hero-section text-center text-white">
+
+    <div class="container">
+
+        <h1 class="display-3 fw-bold">
+            Shop Smarter,
+            <span class="text-warning">Live Better</span>
+        </h1>
+
+        <p class="lead mt-3">
+            Discover premium products with amazing discounts.
+        </p>
+
+        <div class="mt-4">
+
+            <a href="#" class="btn btn-warning btn-lg px-5">
+                Shop Now
+            </a>
+
+            <a href="#" class="btn btn-outline-light btn-lg px-5 ms-3">
+                Explore
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Categories -->
+
+<section class="container my-5">
+
+    <h2 class="text-center mb-5">
+        Shop by Category    
+    </h2>
+
+    <div class="row text-center">
+
+        <div class="col-md-3">
+            <div class="category-card">
+                📱
+                <h5>Electronics</h5>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="category-card">
+                👗
+                <h5>Fashion</h5>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="category-card">
+                👟
+                <h5>Shoes</h5>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="category-card">
+                💄
+                <h5>Beauty</h5>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Featured Products -->
+
+<section class="container my-5">
+
+    <h2 class="text-center mb-5">
+        Featured Products
+    </h2>
+
+    <div class="row">
+
+        <!-- Product 1 -->
+<div class="row">
+
+{% for product in products %}
+
+<div class="col-md-4 mb-4">
+
+    <div class="card h-100">
+
+        <img src="{{ product.image }}" class="card-img-top">
+
+        <div class="card-body">
+
+            <h5>{{ product.name }}</h5>
+
+            <p>₹{{ product.price }}</p>
+
+           <a href="/add-to-cart/{{ product.id }}" class="btn btn-success">
+    Add to Cart
+</a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</a>
+
+</section>
+
+{% endblock %}
+
+

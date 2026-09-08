@@ -1,0 +1,64 @@
+```html
+{% extends "base.html" %}
+
+{% block title %}
+Order Confirmed | ShopEase
+{% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+
+    <div class="card text-center shadow">
+
+        <div class="card-body p-5">
+
+            <h1 class="text-success mb-4">
+                🎉 Order Placed Successfully!
+            </h1>
+
+            <p class="lead">
+                Thank you for shopping with ShopEase.
+            </p>
+
+            <p>
+                Your order has been successfully placed.
+            </p>
+
+            <h4 class="mt-4">
+                Order ID:
+                <span class="text-primary">
+                    #{{ order_id }}
+                </span>
+            </h4>
+
+            <h4 class="mt-3">
+                Total:
+                <span class="text-success">
+                    ₹{{ total }}
+                </span>
+            </h4>
+
+            <!-- View Order Details -->
+            <div class="mt-4">
+
+                <a href="{{ url_for('order_details', order_id=order_id) }}"
+                   class="btn btn-primary">
+                    📦 View Order Details
+                </a>
+
+                <a href="{{ url_for('home') }}"
+                   class="btn btn-secondary ms-2">
+                    🛍️ Continue Shopping
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+```

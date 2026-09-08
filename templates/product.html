@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ product.name }} | ShopEase
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <!-- Product Image -->
+        <div class="col-md-6 text-center">
+
+            <img src="{{ product.image }}"
+                 alt="{{ product.name }}"
+                 class="img-fluid rounded"
+                 style="max-height: 450px; object-fit: contain;">
+
+        </div>
+
+        <!-- Product Details -->
+        <div class="col-md-6">
+
+            <h1 class="mb-3">
+                {{ product.name }}
+            </h1>
+
+            <h3 class="text-success mb-4">
+                ₹{{ product.price }}
+            </h3>
+
+            <p class="text-muted">
+                This is a high-quality {{ product.name }} available at ShopEase.
+            </p>
+
+            <hr>
+
+            <!-- Add to Cart -->
+            <a href="{{ url_for('add_to_cart', id=product.id) }}" class="btn btn-primary">
+    Add to Cart
+</a>
+
+            <!-- Go to Cart -->
+            <a href="{{ url_for('cart') }}"
+               class="btn btn-outline-dark btn-lg ms-2">
+                View Cart
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

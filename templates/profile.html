@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Account | ShopEase
+{% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} text-center">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="container my-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card shadow">
+
+                <div class="card-body p-5">
+
+                    <h2 class="text-center mb-4">
+                        👤 My Account
+                    </h2>
+
+                    <div class="mb-3">
+                        <label class="fw-bold">Account ID</label>
+                        <p class="form-control">
+                            {{ user.id }}
+                        </p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="fw-bold">Name</label>
+                        <p class="form-control">
+                            {{ user.name }}
+                        </p>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="fw-bold">Email</label>
+                        <p class="form-control">
+                            {{ user.email }}
+                        </p>
+                    </div>
+
+                    <div class="d-grid gap-2">
+
+                          <a href="{{ url_for('edit_profile') }}"
+                                 class="btn btn-primary">
+                                ✏️ Edit Profile
+                             </a>
+
+                        <a href="{{ url_for('my_orders') }}"
+                           class="btn btn-primary">
+                            📦 My Orders
+                        </a>
+
+                        <a href="{{ url_for('change_password') }}"
+   class="btn btn-warning">
+    🔐 Change Password
+</a>
+
+                        <a href="{{ url_for('logout') }}"
+                           class="btn btn-outline-danger">
+                            Logout
+                        </a>
+
+                        
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
