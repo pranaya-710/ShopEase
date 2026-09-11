@@ -11,13 +11,21 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t shopease:latest .'
+                bat 'docker build -t pranaya803/shopease:latest .'
             }
         }
 
-        stage('Test') {
+        stage('Push to Docker Hub') {
             steps {
-                bat 'docker images shopease:latest'
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-credentials',
+                    usernameVariable: 'DOCKER_USERNAME',
+                    passwordVariable: 'DOCKER_PASSWORD'
+                )]) {
+                    bat 'docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%'
+                    bat 'docker push pranaya803/shopease:latest'
+                    bat 'docker logout'
+                }
             }
         }
     }
