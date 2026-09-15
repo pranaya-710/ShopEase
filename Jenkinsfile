@@ -18,7 +18,7 @@ pipeline {
                 )]) {
                     bat '''
                         echo Logging in to Docker Hub...
-                        echo %DOCKER_PASSWORD% | docker login docker.io -u %DOCKER_USERNAME% --password-stdin
+                        echo %DOCKER_PASSWORD%| docker login docker.io -u %DOCKER_USERNAME% --password-stdin
 
                         echo Pushing image...
                         docker push %DOCKER_USERNAME%/shopease:latest
