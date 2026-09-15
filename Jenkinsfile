@@ -1,14 +1,7 @@
-
 pipeline {
     agent any
 
     stages {
-
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
@@ -24,8 +17,13 @@ pipeline {
                     passwordVariable: 'DOCKER_PASSWORD'
                 )]) {
                     bat '''
-                        echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin
+                        echo Logging in to Docker Hub...
+                        echo %DOCKER_PASSWORD% | docker login docker.io -u %DOCKER_USERNAME% --password-stdin
+
+                        echo Pushing image...
                         docker push %DOCKER_USERNAME%/shopease:latest
+
+                        echo Logging out...
                         docker logout
                     '''
                 }
@@ -35,7 +33,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat '''
-                    cd /d C:\\Users\\prana\\OneDrive\\Desktop\\Projects\\Shopease
+                    echo Deploying application...
                     docker compose pull
                     docker compose up -d
                 '''
