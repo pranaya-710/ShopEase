@@ -1,7 +1,14 @@
+
 pipeline {
     agent any
 
     stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
@@ -17,27 +24,28 @@ pipeline {
                     passwordVariable: 'DOCKER_PASSWORD'
                 )]) {
                     bat '''
-                        echo Logging in to Docker Hub...
-                        echo %DOCKER_PASSWORD%| docker login docker.io -u %DOCKER_USERNAME% --password-stdin
-
-                        echo Pushing image...
+                        echo | set /p="%DOCKER_PASSWORD%" | docker login docker.io -u %DOCKER_USERNAME% --password-stdin
                         docker push %DOCKER_USERNAME%/shopease:latest
-
-                        echo Logging out...
                         docker logout
                     '''
                 }
             }
         }
 
-        stage('Deploy') {
-            steps {
-                bat '''
-                    echo Deploying application...
-                    docker compose pull
-                    docker compose up -d
-                '''
-            }
-        }
+       stage('Deploy') {
+           steps {
+                  bat '''
+                       echo Deploying application...
+
+                       cd /d C:\\Users\\prana\\OneDrive\\Desktop\\Projects\\Shopease
+
+                       docker compose pull
+                       if errorlevel 1 exit /b 1
+
+                       docker compose up -d
+                      if errorlevel 1 exit /b 1
+                    '''
+    }
+}
     }
 }
