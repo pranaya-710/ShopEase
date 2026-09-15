@@ -1,6 +1,6 @@
 services:
   web:
-    build: .
+    image: pranaya803/shopease:latest
     container_name: shopease-web
     ports:
       - "5000:5000"

@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -28,6 +29,16 @@ pipeline {
                         docker logout
                     '''
                 }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                bat '''
+                    cd /d C:\\Users\\prana\\OneDrive\\Desktop\\Projects\\Shopease
+                    docker compose pull
+                    docker compose up -d
+                '''
             }
         }
     }
