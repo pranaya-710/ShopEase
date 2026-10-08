@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -32,19 +31,20 @@ pipeline {
             }
         }
 
-      stage('Deploy') {
+        stage('Deploy') {
             steps {
                 withCredentials([sshUserPrivateKey(
                     credentialsId: 'ec2-ssh',
                     keyFileVariable: 'SSH_KEY',
                     usernameVariable: 'SSH_USER'
-        )]) {
-            bat '''
-                echo Deploying application to EC2...
+                )]) {
+                    bat '''
+                        echo Deploying application to EC2...
 
-                ssh -o StrictHostKeyChecking=no -i "%SSH_KEY%" %SSH_USER%@54.175.151.139 "cd /root/ShopEase && docker compose pull web && docker compose up -d web"
-            '''
+                        ssh -o StrictHostKeyChecking=no -i "%SSH_KEY%" %SSH_USER%@54.175.151.139 "cd /root/ShopEase && docker compose pull web && docker compose up -d web"
+                    '''
+                }
+            }
         }
     }
-}
 }
