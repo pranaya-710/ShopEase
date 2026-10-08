@@ -32,20 +32,19 @@ pipeline {
             }
         }
 
-       stage('Deploy') {
-           steps {
-                  bat '''
-                       echo Deploying application...
+      stage('Deploy') {
+            steps {
+                withCredentials([sshUserPrivateKey(
+                    credentialsId: 'ec2-ssh',
+                    keyFileVariable: 'SSH_KEY',
+                    usernameVariable: 'SSH_USER'
+        )]) {
+            bat '''
+                echo Deploying application to EC2...
 
-                       cd /d C:\\Users\\prana\\OneDrive\\Desktop\\Projects\\Shopease
-
-                       docker compose pull
-                       if errorlevel 1 exit /b 1
-
-                       docker compose up -d
-                      if errorlevel 1 exit /b 1
-                    '''
+                ssh -o StrictHostKeyChecking=no -i "%SSH_KEY%" %SSH_USER%@54.175.151.139 "cd /root/ShopEase && docker compose pull web && docker compose up -d web"
+            '''
+        }
     }
 }
-    }
 }
