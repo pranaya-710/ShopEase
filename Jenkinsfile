@@ -41,7 +41,7 @@ pipeline {
                     usernameVariable: 'SSH_USER'
                 )]) {
                     bat '''
-                        whomai
+                        whoami
                         echo Fixing temporary SSH key permissions...
 
                         icacls "%SSH_KEY%" /inheritance:r
