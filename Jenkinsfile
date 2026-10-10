@@ -49,7 +49,7 @@ pipeline {
 
                         icacls "%SSH_KEY%" /remove "BUILTIN\\Users"
 
-                        icacls "%SSH_KEY%" /grant:r "pranaya\\prana:R"
+                        icacls "%SSH_KEY%" /grant:r "*S-1-5-18:R"
                         if errorlevel 1 exit /b 1
 
                         echo Deploying ShopEase to EC2...
