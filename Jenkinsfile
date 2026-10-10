@@ -54,7 +54,7 @@ pipeline {
 
                         echo Deploying ShopEase to EC2...
 
-                        ssh -o StrictHostKeyChecking=no -i "%SSH_KEY%" %SSH_USER%@54.205.173.45 "sudo docker -v"
+                        ssh -o StrictHostKeyChecking=no -i "%SSH_KEY%" %SSH_USER%@54.205.173.45 "sudo bash -c 'cd /root/ShopEase && docker compose pull web && docker compose up -d web'"
                         if errorlevel 1 exit /b 1
                     '''
                 }
