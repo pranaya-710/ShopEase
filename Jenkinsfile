@@ -41,7 +41,7 @@ pipeline {
                     bat '''
                         echo Deploying application to EC2...
 
-                        ssh -o StrictHostKeyChecking=no -i "%SSH_KEY%" %SSH_USER%@54.175.151.139 "cd /root/ShopEase && docker compose pull web && docker compose up -d web"
+                        ssh -o StrictHostKeyChecking=no -i "%SSH_KEY%" %SSH_USER%@54.205.173.45 "cd /root/ShopEase && docker compose pull web && docker compose up -d web"
                     '''
                 }
             }
