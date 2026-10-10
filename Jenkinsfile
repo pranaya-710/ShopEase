@@ -31,6 +31,8 @@ pipeline {
             }
         }
 
+       
+
         stage('Deploy') {
             steps {
                 withCredentials([sshUserPrivateKey(
@@ -39,12 +41,25 @@ pipeline {
                     usernameVariable: 'SSH_USER'
                 )]) {
                     bat '''
-                        echo Deploying application to EC2...
+                        echo Fixing temporary SSH key permissions...
+
+                        icacls "%SSH_KEY%" /inheritance:r
+                        if errorlevel 1 exit /b 1
+
+                        icacls "%SSH_KEY%" /remove "BUILTIN\\Users"
+
+                        icacls "%SSH_KEY%" /grant:r "%USERDOMAIN%\\%USERNAME%:R"
+                        if errorlevel 1 exit /b 1
+
+                        echo Deploying ShopEase to EC2...
 
                         ssh -o StrictHostKeyChecking=no -i "%SSH_KEY%" %SSH_USER%@54.205.173.45 "cd /root/ShopEase && docker compose pull web && docker compose up -d web"
+
+                        if errorlevel 1 exit /b 1
                     '''
                 }
             }
         }
-    }
+ 
+    } 
 }
